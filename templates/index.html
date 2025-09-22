@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <header>
+        <h1>{{ title }}</h1>
+    </header>
+
+    <div class="summary-card">
+        <div class="total-spent-block">
+            <h2>Total Gasto no Período</h2>
+            <p>R$ {{ "%.2f"|format(total_gasto) }}</p>
+        </div>
+
+        {% if grafico_data %}
+        <div class="category-chart-container">
+            <h3>Gastos por Categoria</h3>
+            <div class="chart-bars">
+                {% for item in grafico_data %}
+                <div class="chart-item" style="--percentage: {{ item.percentual }}%;">
+                    <div class="bar-value-label">R$ {{ "%.2f"|format(item.valor_total) }}</div>
+                    <div class="chart-bar"></div>
+                    <div class="bar-label">{{ item.categoria_abrev }}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    
+    {% if gastos %}
+    <div class="expense-list">
+        <h3>Detalhes dos Gastos</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Descrição</th>
+                    <th>Categoria</th>
+                    <th class="valor-header">Valor (BRL)</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for gasto in gastos %}
+                <tr>
+                    <td>{{ gasto['data'].split('-') | reverse | join('/') }}</td>
+                    <td>{{ gasto['descricao'] }}</td>
+                    
+                    <td>
+                        {{ gasto['categoria'] }}
+                        {% if gasto.info_parcela %}
+                            <span class="parcela-info">{{ gasto.info_parcela }}</span>
+                        {% endif %}
+                    </td>
+
+                    <td class="valor">
+                        R$ {{ "%.2f"|format(gasto['valor_brl']) }}
+                        {% if gasto['moeda_original'] != 'BRL' %}
+                            <span class="original-currency">({{ gasto['moeda_original'] }} {{ "%.2f"|format(gasto['valor_original']) }})</span>
+                        {% endif %}
+                    </td>
+                    <td class="actions-cell">
+                        <button class="btn-edit" 
+                                onclick="openEditModal(this)"
+                                data-id="{{ gasto.id }}"
+                                data-descricao="{{ gasto.descricao }}"
+                                data-categoria="{{ gasto.categoria }}"
+                                data-data="{{ gasto.data }}"
+                                data-valor-original="{{ gasto.valor_original }}"
+                                data-moeda-original="{{ gasto.moeda_original }}"
+                                data-info-parcela="{{ gasto.info_parcela or '' }}">
+                        </button>
+                        <button class="btn-delete" 
+                                onclick="openDeleteModal('{{ gasto.id }}')">
+                        </button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="expense-list">
+        <p style="text-align: center; padding: 20px;">Nenhum gasto encontrado para este período.</p>
+    </div>
+    {% endif %}
+{% endblock %}
