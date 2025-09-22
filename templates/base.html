@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador Financeiro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar" id="sidebar">
+            <h3>Navegação</h3>
+            <a href="/" class="nav-all">Ver Todos os Gastos</a>
+            <hr>
+            
+            <details class="month-accordion">
+                <summary>Selecionar mês para visualização</summary>
+                {% for nav in nav_months %}
+                    <div class="nav-month">
+                        <a href="{{ url_for('index', ano=nav.ano, mes=nav.mes) }}">{{ nav.nome }} / {{ nav.ano }}</a>
+                    </div>
+                {% endfor %}
+            </details>
+            
+            <hr>
+            
+            <h4>Adicionar Gasto</h4>
+            <form action="{{ url_for('index') }}" method="post" class="add-form">
+                <div class="form-field">
+                    <label for="descricao">Descrição:</label>
+                    <input type="text" id="descricao" name="descricao" required>
+                </div>
+
+                <div class="form-group-inline">
+                    <div class="form-field grow">
+                        <label for="valor">Valor:</label>
+                        <input type="number" id="valor" name="valor" step="0.01" required>
+                    </div>
+                    <div class="form-field no-grow">
+                        <label for="moeda">Moeda:</label>
+                        <select name="moeda" id="moeda" required>
+                            {% for moeda in moedas %}
+                                <option value="{{ moeda }}" {% if moeda == 'BRL' %}selected{% endif %}>{{ moeda }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-field">
+                    <label for="categoria">Categoria:</label>
+                    <select name="categoria" id="categoria" required onchange="toggleParcelasField()">
+                        <option value="" disabled selected>Selecione uma categoria</option>
+                        {% for cat in categorias %}
+                            <option value="{{ cat }}">{{ cat }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-field" id="parcelas-field" style="display: none;">
+                    <label>Parcela:</label>
+                    <div class="parcelas-group">
+                        <select name="parcela_atual" id="parcela-atual"></select>
+                        <span class="parcela-separator">/</span>
+                        <select name="parcela_total" id="parcela-total" onchange="updateParcelaAtualOptions('parcela-total', 'parcela-atual')">
+                            {% for i in range(1, 61) %}<option value="{{ i }}">{{ "%02d"|format(i) }}</option>{% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="data">Data da Despesa:</label>
+                    <input type="date" id="data" name="data" 
+                           value="{{ current_date }}" 
+                           min="{{ min_date }}" 
+                           max="{{ current_date }}" 
+                           required>
+                </div>
+                
+                <button type="submit">Adicionar</button>
+            </form>
+        </nav>
+
+        <div class="overlay" id="overlay"></div>
+
+        <main class="content">
+            <button class="sidebar-toggle" id="sidebar-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            {% block content %}{% endblock %}
+
+        </main>
+    </div>
+
+    <!-- Modal de Exclusão -->
+    <div id="delete-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="document.getElementById('delete-modal').style.display='none'">&times;</span>
+            <h4>Confirmar Exclusão</h4>
+            <p>Tem certeza que deseja excluir este gasto permanentemente? Esta ação não pode ser desfeita.</p>
+            <div class="modal-actions">
+                <button type="button" class="btn-cancel" onclick="document.getElementById('delete-modal').style.display='none'">Cancelar</button>
+                <form id="modal-delete-form" method="POST" style="display: inline;">
+                    <button type="submit" class="btn-confirm-delete">Confirmar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Edição -->
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeEditModal()">&times;</span>
+            <h4 class="edit-modal-title">Editar Gasto</h4>
+            <form id="modal-edit-form" method="POST">
+                <div class="add-form">
+                    <div class="form-field">
+                        <label for="edit-descricao">Descrição:</label>
+                        <input type="text" id="edit-descricao" name="descricao" required>
+                    </div>
+                    <div class="form-group-inline">
+                        <div class="form-field grow">
+                            <label for="edit-valor-original">Valor:</label>
+                            <input type="number" id="edit-valor-original" name="valor_original" step="0.01" required>
+                        </div>
+                        <div class="form-field no-grow">
+                            <label for="edit-moeda-original">Moeda:</label>
+                            <select id="edit-moeda-original" name="moeda_original" required>
+                                {% for moeda in moedas %}
+                                    <option value="{{ moeda }}">{{ moeda }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-categoria">Categoria:</label>
+                        <select id="edit-categoria" name="categoria" required onchange="toggleParcelasFieldEdit()">
+                            {% for cat in categorias %}
+                                <option value="{{ cat }}">{{ cat }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-field" id="parcelas-field-edit" style="display: none;">
+                        <label>Parcela:</label>
+                        <div class="parcelas-group">
+                            <select name="parcela_atual_edit" id="parcela-atual-edit"></select>
+                            <span class="parcela-separator">/</span>
+                            <select name="parcela_total_edit" id="parcela-total-edit" onchange="updateParcelaAtualOptions('parcela-total-edit', 'parcela-atual-edit')">
+                                {% for i in range(1, 61) %}<option value="{{ i }}">{{ "%02d"|format(i) }}</option>{% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-data">Data:</label>
+                        <input type="date" id="edit-data" name="data" min="{{ min_date }}" max="{{ current_date }}" required>
+                    </div>
+                    <button type="submit">Salvar Alterações</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Função genérica para atualizar as opções da "parcela atual"
+        function updateParcelaAtualOptions(totalSelectId, atualSelectId) {
+            const totalSelect = document.getElementById(totalSelectId);
+            const atualSelect = document.getElementById(atualSelectId);
+            const maxParcelas = parseInt(totalSelect.value, 10);
+            const valorSelecionadoAnteriormente = parseInt(atualSelect.value, 10);
+
+            atualSelect.innerHTML = '';
+
+            for (let i = 1; i <= maxParcelas; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = i.toString().padStart(2, '0');
+                atualSelect.appendChild(option);
+            }
+
+            if (valorSelecionadoAnteriormente && valorSelecionadoAnteriormente <= maxParcelas) {
+                atualSelect.value = valorSelecionadoAnteriormente;
+            }
+        }
+
+        // Função para o formulário de ADIÇÃO
+        function toggleParcelasField() {
+            const categoriaSelect = document.getElementById('categoria');
+            const parcelasField = document.getElementById('parcelas-field');
+            const isParcelas = categoriaSelect.value === 'Parcelas/Crédito';
+            
+            parcelasField.style.display = isParcelas ? 'block' : 'none';
+
+            if (isParcelas) {
+                updateParcelaAtualOptions('parcela-total', 'parcela-atual');
+            }
+        }
+
+        // Função para o formulário de EDIÇÃO
+        function toggleParcelasFieldEdit() {
+            const categoriaSelect = document.getElementById('edit-categoria');
+            const parcelasField = document.getElementById('parcelas-field-edit');
+            parcelasField.style.display = (categoriaSelect.value === 'Parcelas/Crédito') ? 'block' : 'none';
+        }
+
+        // --- Controle da Sidebar Responsiva ---
+        const sidebar = document.getElementById('sidebar');
+        const toggleButton = document.getElementById('sidebar-toggle');
+        const overlay = document.getElementById('overlay');
+        function toggleSidebar() { document.body.classList.toggle('sidebar-open'); }
+        if (toggleButton) { toggleButton.addEventListener('click', toggleSidebar); }
+        if (overlay) { overlay.addEventListener('click', toggleSidebar); }
+
+        // --- Controle do Modal de Exclusão ---
+        const deleteModal = document.getElementById('delete-modal');
+        const deleteForm = document.getElementById('modal-delete-form');
+        function openDeleteModal(id) {
+            if (deleteModal && deleteForm) {
+                deleteForm.action = `/gasto/excluir/${id}`;
+                deleteModal.style.display = 'block';
+            }
+        }
+        
+        // --- Controle do Modal de Edição ---
+        const editModal = document.getElementById('edit-modal');
+        const editForm = document.getElementById('modal-edit-form');
+        function openEditModal(button) {
+            const id = button.dataset.id;
+            const descricao = button.dataset.descricao;
+            const categoria = button.dataset.categoria;
+            const data = button.dataset.data;
+            const valorOriginal = button.dataset.valorOriginal;
+            const moedaOriginal = button.dataset.moedaOriginal;
+            const infoParcela = button.dataset.infoParcela || '1/1';
+
+            if (editForm) {
+                editForm.action = `/gasto/editar/${id}`;
+                document.getElementById('edit-descricao').value = descricao;
+                document.getElementById('edit-valor-original').value = valorOriginal;
+                document.getElementById('edit-moeda-original').value = moedaOriginal;
+                document.getElementById('edit-categoria').value = categoria;
+                document.getElementById('edit-data').value = data;
+                
+                toggleParcelasFieldEdit();
+                
+                if (infoParcela && infoParcela.includes('/')) {
+                    const [parcelaAtual, parcelaTotal] = infoParcela.split('/');
+                    
+                    document.getElementById('parcela-total-edit').value = parseInt(parcelaTotal, 10);
+                    updateParcelaAtualOptions('parcela-total-edit', 'parcela-atual-edit');
+                    document.getElementById('parcela-atual-edit').value = parseInt(parcelaAtual, 10);
+                }
+            }
+            if (editModal) { editModal.style.display = 'block'; }
+        }
+
+        function closeEditModal() { if (editModal) { editModal.style.display = 'none'; } }
+        
+        window.onclick = function(event) {
+            if (event.target == deleteModal) {
+                deleteModal.style.display = 'none';
+            }
+            if (event.target == editModal) {
+                closeEditModal();
+            }
+        }
+
+        // Garante que o campo de parcela seja inicializado corretamente na primeira carga da página
+        document.addEventListener('DOMContentLoaded', function() {
+            toggleParcelasField();
+        });
+    </script>
+</body>
+</html>
