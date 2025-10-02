@@ -78,7 +78,8 @@ A área de conteúdo principal exibe as informações financeiras do período se
 
 A figura abaixo ilustra a visão geral da solução:
 
-`[Figura 1: Visão Geral da Solução - Um diagrama mostrando o fluxo: Usuário acessa via Navegador, que interage com a Aplicação Flask. A Aplicação Flask, por sua vez, se comunica com o Banco de Dados SQLite para dados internos e com a ExchangeRate-API para dados externos.]`
+<img width="1536" height="1024" alt="ChatGPT Image 2 de out  de 2025, 14_12_39 (1)" src="https://github.com/user-attachments/assets/7e47f654-5cc2-4788-895c-01b364847e19" />
+
 
 Um exemplo da lógica de conversão de moeda implementada no backend:
 ```python
@@ -100,7 +101,8 @@ def obter_valor_convertido(valor_original, moeda_original):
 
 A tela principal do sistema esta representada abaixo:
 
-`[Figura 2: Tela]`
+<img width="1916" height="904" alt="image" src="https://github.com/user-attachments/assets/37deef8f-7d79-4c6a-98da-ae9ebb70b3f6" />
+
 
 
 ### **Arquitetura**
@@ -110,7 +112,8 @@ Todos os artefatos e o código-fonte do projeto estão disponíveis no repositó
 
 A arquitetura da aplicação segue o padrão de 3 camadas (3-Tier Architecture), como ilustrado na figura abaixo:
 
-`[Figura 6: Arquitetura em Camadas - Um diagrama com três blocos: 1. Camada de Apresentação (Frontend: HTML, CSS, JavaScript, Renderização no Navegador); 2. Camada de Aplicação/Lógica (Backend: Python, Flask, Gunicorn, Lógica de Negócio); 3. Camada de Dados (Data Layer: SQLite, Banco de Dados). Setas indicam a comunicação entre as camadas.]`
+<img width="1536" height="1024" alt="ChatGPT Image 2 de out  de 2025, 14_16_55" src="https://github.com/user-attachments/assets/e70cda14-b515-4dc0-bb2b-00c4fa4fde06" />
+
 
 Foram gerados os seguintes artefatos durante o desenvolvimento:
 
