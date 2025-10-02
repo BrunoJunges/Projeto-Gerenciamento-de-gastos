@@ -143,15 +143,15 @@ A validação da solução foi realizada através de um teste de usabilidade qua
 O objetivo era observar a facilidade de uso, a clareza da interface e identificar quaisquer pontos de fricção ou confusão.
 
 #### **Consolidação dos Dados Coletados**
-Os resultados foram extremamente positivos. Todos os 3 participantes completaram 100% das tarefas com sucesso e sem assistência. O feedback verbal coletado foi consolidado abaixo:
+Os resultados foram em sua maioria positivos. Todos os 3 participantes completaram 100% das tarefas com sucesso e sem assistência. O feedback verbal coletado foi consolidado abaixo:
 
 | Tópico | Feedback Positivo | Sugestão de Melhoria |
 | :--- | :--- | :--- |
 | **Interface** | "Muito limpa e fácil de entender", "O gráfico é ótimo para ver o resumo" | A cor do botão de edição poderia ser mais contrastante. |
 | **Funcionalidade** | "A conversão de moeda é incrível, muito prático", "Adorei que o campo de parcela só aparece quando precisa" | "Seria legal poder cadastrar gastos recorrentes, como o aluguel." |
-| **Responsividade**| "Funciona muito bem no celular." | Nenhum. |
+| **Responsividade**| "..." | falta de resposividade até então. |
 
-A análise dos dados indica que os objetivos de simplicidade, usabilidade e funcionalidade foram plenamente atingidos. A principal sugestão para trabalho futuro é a implementação de despesas recorrentes.
+A análise dos dados indica que os objetivos de simplicidade, usabilidade e funcionalidade foram plenamente atingidos. A principal sugestão para trabalho futuro é a implementação de despesas recorrentes e a responsividade.
 
 ### **Conclusões**
 
