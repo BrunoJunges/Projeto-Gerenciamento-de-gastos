@@ -45,14 +45,12 @@
                 <tr>
                     <td>{{ gasto['data'].split('-') | reverse | join('/') }}</td>
                     <td>{{ gasto['descricao'] }}</td>
-                    
                     <td>
                         {{ gasto['categoria'] }}
                         {% if gasto.info_parcela %}
                             <span class="parcela-info">{{ gasto.info_parcela }}</span>
                         {% endif %}
                     </td>
-
                     <td class="valor">
                         R$ {{ "%.2f"|format(gasto['valor_brl']) }}
                         {% if gasto['moeda_original'] != 'BRL' %}
@@ -60,19 +58,8 @@
                         {% endif %}
                     </td>
                     <td class="actions-cell">
-                        <button class="btn-edit" 
-                                onclick="openEditModal(this)"
-                                data-id="{{ gasto.id }}"
-                                data-descricao="{{ gasto.descricao }}"
-                                data-categoria="{{ gasto.categoria }}"
-                                data-data="{{ gasto.data }}"
-                                data-valor-original="{{ gasto.valor_original }}"
-                                data-moeda-original="{{ gasto.moeda_original }}"
-                                data-info-parcela="{{ gasto.info_parcela or '' }}">
-                        </button>
-                        <button class="btn-delete" 
-                                onclick="openDeleteModal('{{ gasto.id }}')">
-                        </button>
+                        <button class="btn-edit" onclick="openEditModal(this)" data-id="{{ gasto.id }}" data-descricao="{{ gasto.descricao }}" data-categoria="{{ gasto.categoria }}" data-data="{{ gasto.data }}" data-valor-original="{{ gasto.valor_original }}" data-moeda-original="{{ gasto.moeda_original }}" data-info-parcela="{{ gasto.info_parcela or '' }}"></button>
+                        <button class="btn-delete" onclick="openDeleteModal('{{ gasto.id }}')"></button>
                     </td>
                 </tr>
                 {% endfor %}
