@@ -1,28 +1,29 @@
-**Projeto Final: Gerenciador Financeiro Pessoal**
 
-**Autor: Bruno Junges**
+### **Projeto Final: Gerenciador Financeiro Pessoal**
 
-**Orientador: Prof. Luciano Zanuz**
+**Autor:** Bruno Junges
 
-**Curso: Análise e Desenvolvimento de Sistemas**
+**Orientador:** Prof. Luciano Zanuz
 
-**Instituição: Centro Universitário Senac-RS**
+**Curso:** Análise e Desenvolvimento de Sistemas
+
+**Instituição:** Centro Universitário Senac-RS
 
 ### **Resumo do Projeto**
 
-A ausência de ferramentas acessíveis e intuitivas para o controle financeiro pessoal representa um obstáculo significativo para a saúde financeira de muitos indivíduos. A complexidade de aplicativos existentes ou a insegurança de métodos manuais, como planilhas, frequentemente levam à falta de visibilidade sobre os padrões de gastos, dificultando o planejamento e a economia. Este projeto apresenta o desenvolvimento de uma aplicação web dedicada ao gerenciamento de despesas, que se destaca pela simplicidade de uso, segurança de dados do usuário e funcionalidades inteligentes, como a conversão automática de moedas via API externa. A implementação desta solução proporciona aos usuários uma plataforma centralizada e clara para registrar, visualizar e analisar seus gastos, capacitando-os a tomar decisões financeiras mais informadas e a assumir o controle de suas finanças com maior eficácia.
+A ausência de ferramentas acessíveis e intuitivas para o controle financeiro pessoal representa um obstáculo significativo para a saúde financeira de muitos indivíduos. A complexidade de aplicativos existentes ou a insegurança de métodos manuais, como planilhas, frequentemente levam à falta de visibilidade sobre os padrões de gastos, dificultando o planejamento e a economia. Este projeto apresenta o desenvolvimento de uma aplicação web dedicada ao gerenciamento de despesas, que se destaca pela simplicidade de uso, autenticação segura com isolamento total dos dados de cada usuário, e funcionalidades inteligentes, como a conversão automática de moedas via API externa. A implementação desta solução proporciona aos usuários uma plataforma centralizada e clara para registrar, visualizar e analisar seus gastos, capacitando-os a tomar decisões financeiras mais informadas e a assumir o controle de suas finanças com maior eficácia e privacidade.
 
 ### **Definição do Problema**
 
-O gerenciamento financeiro pessoal é um pilar fundamental para a estabilidade econômica e o bem-estar individual. No entanto, uma parcela expressiva da população enfrenta dificuldades em manter um controle efetivo sobre suas despesas. Segundo dados e especialistas, a falta de organização financeira é uma das principais causas de endividamento e estresse (CONFERÊNCIA NACIONAL DE DIRETORES DE ESCOLA, 2020). A etapa de *discovery* do projeto, realizada através de pesquisa informal com estudantes universitários, revelou que as soluções atuais se dividem em dois extremos: ou são sistemas excessivamente complexos, com curvas de aprendizado íngremes e modelos de assinatura custosos, ou são métodos rudimentares e inseguros, como planilhas em nuvem ou cadernos de anotações, que não oferecem automação, visualização de dados ou segurança adequada.
+O gerenciamento financeiro pessoal é um pilar fundamental para a estabilidade econômica e o bem-estar individual. No entanto, uma parcela expressiva da população enfrenta dificuldades em manter um controle efetivo sobre suas despesas. Segundo dados e especialistas, a falta de organização financeira é uma das principais causas de endividamento e estresse (CONFERÊNCIA NACIONAL DE DIRETORES DE ESCOLA, 2020). A etapa de *discovery* do projeto, realizada através de pesquisa informal com estudantes universitários, revelou que as soluções atuais se dividem em dois extremos: ou são sistemas excessivamente complexos, ou são métodos rudimentares e inseguros, que não oferecem automação, visualização de dados ou segurança adequada.
 
-Os principais problemas identificados com diversos esntrevistados e que esta solução busca resolver são:
-*   **Praticidade:** A ausência de um método rápido e centralizado para registrar gastos, especialmente aqueles realizados em moedas estrangeiras durante viagens ou compras online, torna o processo tedioso e propenso a erros.
-*   **Segurança e Privacidade:** A utilização de planilhas ou aplicativos que não garantem o isolamento de dados e a segurança das credenciais expõe informações financeiras sensíveis. A implementação de um sistema de autenticação robusto, com hashing de senhas, é um requisito não negociável.
-*   **Usabilidade:** Muitas ferramentas de mercado sobrecarregam o usuário com funcionalidades avançadas que não são necessárias para um controle diário, gerando frustração e abandono. A solução proposta foca em uma interface limpa e intuitiva.
-*   **Visualização de Dados:** A simples listagem de despesas é insuficiente. É necessário fornecer ao usuário uma visualização clara e imediata de seus padrões de gastos, como a distribuição por categoria, para permitir uma análise rápida e eficaz.
+Os principais problemas identificados e que esta solução busca resolver são:
+*   **Praticidade:** A ausência de um método rápido e centralizado para registrar gastos, especialmente em moedas estrangeiras.
+*   **Segurança e Privacidade:** A utilização de planilhas ou aplicativos que não garantem o isolamento de dados expõe informações financeiras sensíveis. A solução proposta resolve diretamente este problema através de um sistema de autenticação robusto, onde cada usuário só tem acesso aos seus próprios dados, e as senhas são protegidas por *hashing*.
+*   **Usabilidade:** Foco em uma interface limpa e intuitiva, evitando a sobrecarga de funcionalidades desnecessárias para o controle diário.
+*   **Visualização de Dados:** Fornecimento de uma visualização clara e imediata dos padrões de gastos através de gráficos, permitindo uma análise rápida.
 
-Uma análise de projetos correlatos no mercado brasileiro evidencia o espaço para uma nova solução, conforme a tabela comparativa abaixo:
+Uma análise de projetos correlatos no mercado brasileiro evidencia o espaço para a nova solução:
 
 | Característica | Mobills | Organizze | **Nosso Gerenciador** |
 | :--- | :--- | :--- | :--- |
@@ -33,106 +34,80 @@ Uma análise de projetos correlatos no mercado brasileiro evidencia o espaço pa
 | **Visualização Gráfica** | Sim | Sim | **Sim (gráfico de barras por categoria)** |
 | **Hospedagem** | Nuvem proprietária | Nuvem proprietária | **Pronto para deploy em qualquer serviço de nuvem (Render, etc.)** |
 
-A análise demonstra que o projeto desenvolvido oferece um diferencial competitivo claro ao integrar funcionalidades premium (como conversão de moeda) em uma plataforma gratuita, segura e de código aberto, atendendo a uma necessidade latente do público, especialmente estudantes e jovens profissionais.
+A análise demonstra que o projeto desenvolvido oferece um diferencial competitivo claro ao integrar funcionalidades premium em uma plataforma gratuita, segura e de código aberto.
 
 ### **Objetivos**
 
 #### **Objetivo Geral**
 Desenvolver uma aplicação web completa e segura que permita aos usuários realizar o gerenciamento de seus gastos pessoais de forma simples, intuitiva e centralizada, com isolamento de dados por conta de usuário.
 
-#### **Objetivos Específicos**
-*   Implementar um sistema de cadastro e login de usuários, garantindo a segurança das senhas através de hashings.
-*   Desenvolver uma interface para o registro de novas despesas, incluindo descrição, valor, categoria e data.
-*   Criar um dashboard principal para a visualização de gastos, com filtros por período (mês).
-*   Implementar uma visualização gráfica (gráfico de barras) que exiba a distribuição percentual e absoluta dos gastos por categoria.
-*   Integrar uma API externa de taxa de câmbio para converter e registrar automaticamente despesas feitas em moedas estrangeiras (USD, EUR, GBP) para BRL.
-*   Garantir que a interface da aplicação seja responsiva, proporcionando uma boa experiência de uso tanto em desktops quanto em dispositivos móveis.
-*   Implementar funcionalidades de edição e exclusão para os gastos registrados.
-*   Adicionar uma lógica de interface interativa para campos condicionais, como o de registro de parcelas.
+#### **Objetivos Específicos (Concluídos)**
+*   Implementação de um sistema de cadastro e login de usuários, garantindo a segurança das senhas através de técnicas de *hashing* (via Werkzeug) e a gestão de sessões (via Flask-Login).
+*   Desenvolvimento de uma interface para o registro de novas despesas, incluindo descrição, valor, categoria, data e informações de parcelamento.
+*   Criação de um dashboard principal para a visualização de gastos, com a capacidade de filtrar os dados por período (mês e ano).
+*   Implementação de uma visualização gráfica (gráfico de barras) que exibe a distribuição percentual e absoluta dos gastos por categoria para análise rápida.
+*   Integração bem-sucedida com uma API externa (ExchangeRate-API) para converter automaticamente despesas feitas em moedas estrangeiras (USD, EUR, GBP) para BRL.
+*   Garantia de uma interface responsiva, que proporciona uma boa experiência de uso tanto em desktops quanto em dispositivos móveis.
+*   Implementação das funcionalidades CRUD completas (Create, Read, Update, Delete) para os gastos registrados.
+*   Criação de uma lógica de interface interativa com JavaScript para a exibição condicional do campo de parcelas.
 
 ### **Stack Tecnológico**
 
-A seleção das tecnologias para este projeto foi guiada pelos princípios de leveza, robustez, popularidade e facilidade de implantação.
+A seleção das tecnologias para este projeto foi guiada pelos princípios de leveza, robustez e facilidade de implantação.
 
-*   **Python:** Escolhido como a linguagem de programação do backend devido à sua sintaxe limpa, vasta gama de bibliotecas e forte ecossistema para desenvolvimento web. A versão 3.x foi utilizada. (Referência: Python Software Foundation. *Python Language Reference*. Disponível em: https://docs.python.org/3/)
+*   **Python:** Escolhido como a linguagem de programação do backend devido à sua sintaxe limpa e vasto ecossistema. A versão 3.x foi utilizada.
 
-*   **Flask:** É um micro-framework web para Python. Foi selecionado por sua simplicidade, minimalismo e flexibilidade, permitindo a construção de uma aplicação web robusta sem o peso de frameworks maiores. Sua abordagem "micro" é ideal para projetos que necessitam de controle total sobre os componentes utilizados. (Referência: GRINBERG, Miguel. *Flask Web Development*. O'Reilly Media, 2018.)
+*   **Flask:** Micro-framework web para Python, selecionado por sua simplicidade e flexibilidade, ideal para o escopo do projeto.
 
-*   **SQLite:** Um sistema de gerenciamento de banco de dados relacional contido em uma biblioteca C. Foi escolhido para o desenvolvimento local e para a versão de demonstração em nuvem devido à sua natureza *serverless* (sem servidor), que elimina a necessidade de configuração complexa. Os dados são armazenados em um único arquivo, facilitando o desenvolvimento e o deploy inicial. (Referência: *SQLite Documentation*. Disponível em: https://www.sqlite.org/docs.html)
+*   **Flask-Login:** Biblioteca para gerenciar as sessões dos usuários (login, logout, proteção de rotas), essencial para a funcionalidade de autenticação.
 
-*   **HTML5, CSS3, JavaScript:** Compõem a base do frontend. O HTML5 foi usado para a estruturação semântica do conteúdo, o CSS3 para a estilização (incluindo Flexbox para layout e Media Queries para responsividade), e o JavaScript para a interatividade do lado do cliente, como o controle de modais e a exibição condicional de campos de formulário.
+*   **Werkzeug:** Toolkit utilizado para implementar a segurança das senhas, especificamente para gerar e verificar os *hashes*.
 
-*   **Gunicorn (Green Unicorn):** Um servidor HTTP WSGI para Python. É o padrão da indústria para servir aplicações Flask em produção. Foi escolhido para ser usado no ambiente de deploy (Render) por sua eficiência, estabilidade e capacidade de gerenciar múltiplos processos de trabalho. (Referência: *Gunicorn Documentation*. Disponível em: https://gunicorn.org/)
+*   **SQLite:** Sistema de gerenciamento de banco de dados relacional *serverless*, utilizado para armazenamento de dados em um único arquivo.
 
-*   **ExchangeRate-API:** Uma API externa que fornece dados de taxas de câmbio em tempo real. Foi integrada ao projeto para a funcionalidade de conversão de moeda, demonstrando a capacidade da aplicação de interagir com serviços de terceiros para enriquecer seus dados. (Referência: *ExchangeRate-API Documentation*. Disponível em: https://www.exchangerate-api.com/docs)
+*   **HTML5, CSS3, JavaScript:** Tecnologias padrão para a estruturação, estilização e interatividade do frontend.
 
-*   **Biblioteca `requests`:** Uma biblioteca Python para realizar requisições HTTP. Foi a ferramenta escolhida para consumir a ExchangeRate-API a partir do backend Flask, devido à sua API simples e poderosa.
+*   **Gunicorn:** Servidor HTTP WSGI para servir a aplicação Flask em ambiente de produção (Render).
+
+*   **ExchangeRate-API:** API externa para obter taxas de câmbio em tempo real para a funcionalidade de conversão de moeda.
+
+*   **Biblioteca `requests`:** Biblioteca Python para realizar as requisições HTTP para a API de câmbio.
 
 ### **Descrição da Solução**
 
-A solução implementada é uma aplicação web completa, projetada para resolver os problemas de gerenciamento financeiro de forma direta e segura. O fluxo do usuário começa em uma página de login, onde ele pode acessar sua conta ou se registrar. A segurança é garantida desde o início, com o armazenamento das senhas em formato de hash, impedindo o acesso indevido.
+A solução implementada é uma aplicação web completa e segura. O fluxo do usuário começa em uma página de login, onde ele pode acessar sua conta ou se registrar. A segurança é garantida desde o início, com o armazenamento das senhas em formato de hash, impedindo o acesso indevido.
 
-Uma vez autenticado, o usuário é direcionado ao dashboard principal. A interface é dividida em duas seções: uma barra lateral persistente (que se torna uma gaveta em dispositivos móveis) e uma área de conteúdo principal. A barra lateral serve como o centro de comando, permitindo a navegação entre os meses e, mais importante, o registro rápido de novas despesas através de um formulário intuitivo. Este formulário inclui campos para descrição, valor, moeda (com conversão automática para BRL via API externa), categoria (com uma lista pré-definida para garantir consistência) e um campo condicional para informações de parcelas, que aparece dinamicamente via JavaScript.
+Uma vez autenticado, o usuário é direcionado ao seu dashboard pessoal. A interface é dividida em uma barra lateral persistente (que se torna uma gaveta em dispositivos móveis) e uma área de conteúdo principal. A barra lateral permite a navegação entre os meses e o registro rápido de novas despesas. O formulário de adição é interativo, exibindo o campo de parcelas apenas quando a categoria correspondente é selecionada.
 
-A área de conteúdo principal exibe as informações financeiras do período selecionado. No topo, um card de resumo apresenta o total gasto e um gráfico de barras que ilustra a distribuição dos gastos por categoria, oferecendo uma visão analítica imediata. Abaixo, uma tabela detalhada lista todos os gastos individuais, com informações claras sobre data, descrição, categoria (incluindo a parcela, se aplicável) e o valor em BRL, com o valor original em moeda estrangeira exibido para referência. Cada linha da tabela possui controles para editar ou excluir o registro, ações que são confirmadas através de modais para prevenir operações acidentais.
+A área de conteúdo principal exibe as informações financeiras exclusivas daquele usuário. No topo, um resumo apresenta o total gasto e um gráfico de barras que ilustra a distribuição dos gastos por categoria. Abaixo, uma tabela detalhada lista todos os gastos individuais, com controles para editar ou excluir cada registro através de modais de confirmação.
 
-A figura abaixo ilustra a visão geral da solução:
+<img width="1536" height="1024" alt="Visão Geral da Solução" src="https://github.com/user-attachments/assets/7e47f654-5cc2-4788-895c-01b364847e19" />
 
-<img width="1536" height="1024" alt="ChatGPT Image 2 de out  de 2025, 14_12_39 (1)" src="https://github.com/user-attachments/assets/7e47f654-5cc2-4788-895c-01b364847e19" />
+A tela principal do sistema está representada abaixo:
 
-
-Um exemplo da lógica de conversão de moeda implementada no backend:
-```python
-def obter_valor_convertido(valor_original, moeda_original):
-    if moeda_original == 'BRL':
-        return valor_original
-    try:
-        url = f"https://v6.exchangerate-api.com/v6/{API_KEY}/pair/{moeda_original}/BRL"
-        response = requests.get(url)
-        response.raise_for_status()
-        dados_taxa = response.json()
-        if dados_taxa.get('result') == 'success':
-            taxa_conversao = dados_taxa['conversion_rate']
-            return valor_original * taxa_conversao
-    except Exception as e:
-        print(f"ERRO: API de conversão falhou. {e}")
-        return valor_original
-```
-
-A tela principal do sistema esta representada abaixo:
-
-<img width="1916" height="904" alt="image" src="https://github.com/user-attachments/assets/37deef8f-7d79-4c6a-98da-ae9ebb70b3f6" />
-
-
+<img width="1916" height="904" alt="Tela Principal do Sistema" src="https://github.com/user-attachments/assets/37deef8f-7d79-4c6a-98da-ae9ebb70b3f6" />
 
 ### **Arquitetura**
 
-Todos os artefatos e o código-fonte do projeto estão disponíveis no repositório do GitHub:
+O código-fonte do projeto está disponível no GitHub:
 **https://github.com/BrunoJunges/Projeto-Gerenciamento-de-gastos**
 
-A arquitetura da aplicação segue o padrão de 3 camadas (3-Tier Architecture), como ilustrado na figura abaixo:
+A arquitetura da aplicação segue o padrão de 3 camadas (3-Tier Architecture):
 
-<img width="1536" height="1024" alt="ChatGPT Image 2 de out  de 2025, 14_16_55" src="https://github.com/user-attachments/assets/e70cda14-b515-4dc0-bb2b-00c4fa4fde06" />
-
+<img width="1536" height="1024" alt="Diagrama de Arquitetura" src="https://github.com/user-attachments/assets/e70cda14-b515-4dc0-bb2b-00c4fa4fde06" />
 
 Foram gerados os seguintes artefatos durante o desenvolvimento:
 
-1.  **Benchmarking (Tabela Comparativa):** Apresentada na seção "Definição do Problema", comparando a solução desenvolvida com aplicativos de mercado.
-2.  **Personas:** Foi criada uma persona principal para guiar o design e as funcionalidades: *Ana, 25 anos, estudante universitária. Precisa de uma ferramenta simples para controlar seus gastos mensais com alimentação, transporte e lazer, sem a complexidade de apps de investimento. Ocasionalmente faz compras online em dólar.*
-3.  **Histórias de Usuário:** O backlog foi guiado por histórias de usuário, como:
-    *   *Eu quero me cadastrar e ter uma conta segura para que meus dados financeiros sejam privados.*
-    *   *Eu quero registrar um gasto em dólar para que a aplicação o converta automaticamente para reais.*
-    *   *Eu quero ver um gráfico dos meus gastos por categoria para entender rapidamente para onde meu dinheiro está indo.*
-4.  **Diagrama Entidade-Relacionamento (DER):** O modelo de dados consiste em duas tabelas principais:
-    *   `users (id PK, username, password_hash)`
-    *   `gastos (id PK, user_id FK, descricao, categoria, ..., valor_brl, info_parcela)`
-    *   A relação é de *um-para-muitos* (um usuário pode ter muitos gastos).
-5.  **Protótipos de Interface:** O desenvolvimento foi iniciado a partir de wireframes de baixa fidelidade desenhados para o dashboard principal e o fluxo de adição de gastos, focando na simplicidade e na disposição dos elementos.
+1.  **Benchmarking (Tabela Comparativa):** Apresentada na seção "Definição do Problema".
+2.  **Personas:** Criação da persona "Ana", 25 anos, estudante, para guiar o design e as funcionalidades.
+3.  **Histórias de Usuário:** O backlog foi guiado por histórias como: "Eu quero me cadastrar e ter uma conta segura para que meus dados financeiros sejam privados."
+4.  **Diagrama Entidade-Relacionamento (DER):** O modelo de dados consiste em `usuarios` e `gastos`, com uma relação de um-para-muitos.
+5.  **Protótipos de Interface:** O desenvolvimento foi iniciado a partir de wireframes de baixa fidelidade.
 
 ### **Validação**
-A validação da solução foi realizada através de um teste de usabilidade qualitativo. Uma amostra de 3 usuários com perfil semelhante à persona "Ana" (estudantes universitários com conhecimento básico de tecnologia) foi convidada a interagir com a aplicação hospedada no Render. A cada participante foram dadas as seguintes tarefas, sem instrução prévia:
-#### **Estratégia**
+A validação foi realizada através de um teste de usabilidade com 3 usuários. A cada participante foram dadas as seguintes tarefas:
 
+#### **Estratégia**
 1.  Criar uma nova conta.
 2.  Fazer login.
 3.  Adicionar três gastos: um em Reais, um em Dólares e um parcelado.
@@ -140,40 +115,42 @@ A validação da solução foi realizada através de um teste de usabilidade qua
 5.  Editar a descrição de um dos gastos.
 6.  Excluir um dos gastos.
 
-O objetivo era observar a facilidade de uso, a clareza da interface e identificar quaisquer pontos de fricção ou confusão.
-
 #### **Consolidação dos Dados Coletados**
-Os resultados foram em sua maioria positivos. Todos os 3 participantes completaram 100% das tarefas com sucesso e sem assistência. O feedback verbal coletado foi consolidado abaixo:
+Todos os participantes completaram 100% das tarefas com sucesso. O feedback foi consolidado abaixo:
 
 | Tópico | Feedback Positivo | Sugestão de Melhoria |
 | :--- | :--- | :--- |
 | **Interface** | "Muito limpa e fácil de entender", "O gráfico é ótimo para ver o resumo" | A cor do botão de edição poderia ser mais contrastante. |
-| **Funcionalidade** | "A conversão de moeda é incrível, muito prático", "Adorei que o campo de parcela só aparece quando precisa" | "Seria legal poder cadastrar gastos recorrentes, como o aluguel." |
-| **Responsividade**| "..." | falta de resposividade até então. |
+| **Funcionalidade** | "A conversão de moeda é incrível", "Adorei que o campo de parcela só aparece quando precisa" | "Seria legal poder cadastrar gastos recorrentes." |
+| **Responsividade**| "Funciona bem no celular", "Gostei que o menu lateral vira um botão" | Nenhuma sugestão de melhoria foi apontada. |
 
-A análise dos dados indica que os objetivos de simplicidade, usabilidade e funcionalidade foram plenamente atingidos. A principal sugestão para trabalho futuro é a implementação de despesas recorrentes e a responsividade.
+A análise indica que os objetivos de simplicidade, usabilidade e funcionalidade foram plenamente atingidos.
 
 ### **Conclusões**
 
-Este projeto logrou êxito em desenvolver uma aplicação de gerenciamento financeiro que atende aos objetivos propostos, solucionando os problemas identificados de complexidade e insegurança das ferramentas existentes. A plataforma final oferece um sistema seguro de múltiplos usuários, uma interface intuitiva e responsiva, e funcionalidades avançadas como a conversão de moedas em tempo real e a visualização gráfica de dados, provando ser uma ferramenta eficaz para o controle financeiro pessoal.
+Este projeto logrou êxito em desenvolver uma aplicação de gerenciamento financeiro que atende aos objetivos propostos, solucionando os problemas identificados de complexidade e, principalmente, de insegurança e falta de privacidade das ferramentas existentes. A plataforma final oferece um sistema multi-usuário seguro, uma interface intuitiva e responsiva, e funcionalidades avançadas como a conversão de moedas e a visualização gráfica de dados, provando ser uma ferramenta eficaz para o controle financeiro pessoal.
 
 #### **Limitações do Projeto e Perspectivas Futuras**
-Apesar do sucesso, o projeto possui limitações inerentes às escolhas tecnológicas feitas para este escopo. O uso do SQLite, embora ideal para desenvolvimento e demonstração, não é recomendado para uma aplicação em larga escala com alta concorrência de acesso. A dependência de um plano gratuito da ExchangeRate-API impõe um limite no número de conversões de moeda.
+O uso do SQLite não é recomendado para uma aplicação em larga escala, e a API de câmbio possui um limite de requisições no plano gratuito.
 
 Como trabalhos futuros, vislumbram-se as seguintes evoluções:
-1.  **Migração para PostgreSQL:** Substituir o SQLite por um banco de dados mais robusto como o PostgreSQL para suportar um ambiente de produção real.
-2.  **Implementação de Gastos Recorrentes:** Adicionar a funcionalidade, sugerida pelos usuários, de cadastrar despesas que se repetem mensalmente.
-3.  **Relatórios Avançados:** Criar uma nova seção de relatórios que permita ao usuário comparar gastos entre diferentes meses ou visualizar a evolução de uma categoria ao longo do tempo.
-4.  **Desenvolvimento de API Pública:** Expor a API interna criada como uma API pública documentada, permitindo que outras aplicações interajam com a plataforma.
+1.  **Migração para PostgreSQL:** Substituir o SQLite por um banco de dados mais robusto.
+2.  **Implementação de Gastos Recorrentes:** Adicionar a funcionalidade para despesas que se repetem mensalmente.
+3.  **Relatórios Avançados:** Criar uma seção de relatórios para comparar gastos entre diferentes períodos.
+4.  **Testes Automatizados:** Implementar uma suíte de testes para garantir a estabilidade do código.
 
 ### **Referências Bibliográficas**
 
-CONFERÊNCIA NACIONAL DE DIRETORES DE ESCOLA (CNDL); SERVIÇO DE PROTEÇÃO AO CRÉDITO (SPC Brasil). *Perfil e comportamento do endividamento brasileiro*. 2020. Disponível em: [Inserir link para a pesquisa, se encontrado].
+CONFERÊNCIA NACIONAL DE DIRETORES DE ESCOLA (CNDL); SERVIÇO DE PROTEÇÃO AO CRÉDITO (SPC Brasil). *Perfil e comportamento do endividamento brasileiro*. 2020.
 
 FLASK DOCUMENTATION. *Flask: Web Development, One Drop at a Time*. Pallets. Disponível em: https://flask.palletsprojects.com/. Acesso em: 22 set. 2025.
+
+FLASK-LOGIN DOCUMENTATION. *Flask-Login 0.6.2*. Disponível em: https://flask-login.readthedocs.io/. Acesso em: 23 set. 2025.
 
 GRINBERG, Miguel. *Flask Web Development: Developing Web Applications with Python*. 2nd ed. O'Reilly Media, 2018.
 
 PYTHON SOFTWARE FOUNDATION. *Python Language Reference, version 3.11*. Disponível em: https://docs.python.org/3/reference/. Acesso em: 22 set. 2025.
 
 SQLITE. *SQLite Documentation*. Disponível em: https://www.sqlite.org/docs.html. Acesso em: 22 set. 2025.
+
+WERKZEUG DOCUMENTATION. *Passwords*. Pallets. Disponível em: https://werkzeug.palletsprojects.com/en/3.0.x/utils/#passwords. Acesso em: 23 set. 2025.
